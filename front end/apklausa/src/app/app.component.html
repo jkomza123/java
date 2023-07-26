@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Testas</title>
+    <link rel="stylesheet" href="app.component.css">
+</head>
+<body>
+    <div class="app">
+      <h1>Auksinis Protas 🥇</h1>
+      <div class="quiz">
+        <h2 class="question" id="klaus">{{klausimai[currentQuestion].klausimas}}</h2>
+        <br><input type="text" id="fname" name="fname" style ="display:none">
+        <div id="answer-buttons">
+          <button id="ats1" (click)="answer(currentQuestion,1,klausimai[currentQuestion].ats1)" *ngIf="klausimai[currentQuestion].ats1" class="btn">{{klausimai[currentQuestion].ats1}}</button>
+          <button id="ats2" (click)="answer(currentQuestion,2,klausimai[currentQuestion].ats2)" *ngIf="klausimai[currentQuestion].ats2" class="btn">{{klausimai[currentQuestion].ats2}}</button>
+          <button id="ats3" (click)="answer(currentQuestion,3,klausimai[currentQuestion].ats3)" *ngIf="klausimai[currentQuestion].ats3" class="btn">{{klausimai[currentQuestion].ats3}}</button>
+          <button id="ats4" (click)="answer(currentQuestion,4,klausimai[currentQuestion].ats4)" *ngIf="klausimai[currentQuestion].ats4" class="btn">{{klausimai[currentQuestion].ats4}}</button>
+        </div>
+        <button id="next-btn" (click)="nextQuestion()" style="display:none">Kitas</button>
+        <button id="finalbutton" style="display:none">Bandyti dar kartą</button>
+      </div>
+    </div>
+</body>
+</html>
