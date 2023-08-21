@@ -24,17 +24,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    const arr=["","",""];
-    this.ats=arr;
     this.currentQuestion=-1;
     this.getAll();
     this.atsakymai={
-      id:0,
-      ats1: "",
-      ats2: "",
-      ats3: "",
-      taskai: 0,
-      vardas: ""
+      ats_id:0,
+      klaus_id: 0,
+      ats: "",
+      vardas: "",
+      taskai: 0
   }
   }
 
@@ -51,7 +48,6 @@ export class AppComponent implements OnInit {
   nextQuestion(){
 
     document.getElementById("fname").style.display="none";
-
     if(this.currentQuestion<this.klausimai.length-1){
       this.currentQuestion++;
       document.getElementById("next-btn").innerHTML="Kitas";
@@ -86,22 +82,6 @@ export class AppComponent implements OnInit {
 
       if(this.currentQuestion==this.klausimai.length-1){
         document.getElementById("next-btn").innerHTML="Baigti";
-        document.getElementById("next-btn").addEventListener("click", ()=>{
-          this.atsakymai.vardas= (<HTMLInputElement>document.getElementById("fname")).value;
-          this.atsakymai.id=0;
-          this.atsakymai.taskai=this.points;
-          this.atsakymai.ats1=this.ats[0] ?? "";
-          this.atsakymai.ats2=this.ats[1] ?? "";
-          this.atsakymai.ats3=this.ats[2] ?? "";
-          this.klausimaiservice.postAts(this.atsakymai).subscribe(
-            (data: Atsakymai) =>{
-              console.log(data);
-            },
-            (error: HttpErrorResponse) => {
-              alert(error.message);
-            }
-          );
-        })
       }
     }
     else{
@@ -121,8 +101,27 @@ export class AppComponent implements OnInit {
   }
 
   answer(currentQno:number,option:any,atsak:string){
+    if(option==this.klausimai[this.currentQuestion].teisingas){
+      this.points++;
+      }
+    
+    else{
+    document.getElementById("ats" + option).classList.add("incorrect");
+    }
+    this.atsakymai.vardas= (<HTMLInputElement>document.getElementById("fname")).value;
+    this.atsakymai.klaus_id=this.klausimai[this.currentQuestion].klaus_id;
+    this.atsakymai.ats=atsak;
+    this.atsakymai.taskai=this.points;
+    this.klausimaiservice.postAts(this.atsakymai).subscribe(
+      (data: Atsakymai) =>{
+        console.log(data);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
       document.getElementById("next-btn").style.display = "block";
-      this.ats[currentQno]=atsak??"";
       document.getElementById("ats1").style.pointerEvents = "none";
       document.getElementById("ats2").style.pointerEvents = "none";
       document.getElementById("ats3").style.pointerEvents = "none";
@@ -132,12 +131,6 @@ export class AppComponent implements OnInit {
       document.getElementById("ats4").style.pointerEvents = "none";
       }
 
-    if(option==this.klausimai[this.currentQuestion].teisingas){
-      this.points++;
-      }
     
-    else{
-    document.getElementById("ats" + option).classList.add("incorrect");
-  }
 }
 }

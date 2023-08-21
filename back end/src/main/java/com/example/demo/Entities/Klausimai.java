@@ -8,13 +8,10 @@ import javax.persistence.Table;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
-import java.util.ArrayList;
 
 @Table(name="klausimai")
 @Entity
@@ -26,8 +23,8 @@ import java.util.ArrayList;
 public class Klausimai implements Serializable {
     
     @Id
-    @Column(name="id")
-    private Long id;
+    @Column(name="klaus_id")
+    private Long klaus_id;
 
     @Column(name = "klausimas")
     private String klausimas;
@@ -46,8 +43,5 @@ public class Klausimai implements Serializable {
 
     @Column(name = "teisingas")
     private String teisingas;
-
-    @ManyToMany(mappedBy = "klausimaiList")
-    private List<Atsakymai> atsakymaiList = new ArrayList<>();
     
 }

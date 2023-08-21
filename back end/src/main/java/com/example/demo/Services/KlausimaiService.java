@@ -22,7 +22,7 @@ public class KlausimaiService {
         return klausimaiRepo.findAll();
     }
     
-    public Klausimai klausimaiId(Long id){
-        return klausimaiRepo.findById(id).orElseThrow(() -> new NotFoundException("Klausimas su id "+ id + " neegzistuoja"));
+    public Klausimai klausimaiId(Long klaus_id){
+        return klausimaiRepo.findById(klaus_id).orElseThrow(() -> new NotFoundException("Klausimas su id "+ klaus_id + " neegzistuoja"));
     }
 }

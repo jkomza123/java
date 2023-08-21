@@ -1,5 +1,5 @@
 export interface Klausimai{
-    id: number;
+    klaus_id: number;
     klausimas: string;
     ats1: string;
     ats2: string;

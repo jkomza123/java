@@ -27,9 +27,9 @@ public class KlausimaiResource {
         List<Klausimai> klausimai = klausimaiService.visiKlausimai();
         return new ResponseEntity<>(klausimai, HttpStatus.OK);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Klausimai> KlausimaiId (@PathVariable("id") Long id){
-        Klausimai klausimai = klausimaiService.klausimaiId(id);
+    @GetMapping("/{klaus_id}")
+    public ResponseEntity<Klausimai> KlausimaiId (@PathVariable("klaus_id") Long klaus_id){
+        Klausimai klausimai = klausimaiService.klausimaiId(klaus_id);
         return new ResponseEntity<>(klausimai, HttpStatus.OK);
     }
 }
