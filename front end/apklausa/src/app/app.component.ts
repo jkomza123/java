@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Atsakymai } from './atsakymai';
+import { AtsakymaiService } from './atsakymai.service';
 import { Klausimai } from './klausimai';
 import { KlausimaiService } from './klausimai.service';
 
@@ -17,10 +18,7 @@ export class AppComponent implements OnInit {
   public points:number = 0;
   public ats:string[];
 
-
-  //constructor(private atsakymaiservice: AtsakymaiService) { }
-
-  constructor(private klausimaiservice: KlausimaiService) { }
+  constructor(private klausimaiservice: KlausimaiService, private atsakymaiservice: AtsakymaiService) { }
 
   ngOnInit() {
 
@@ -112,7 +110,7 @@ export class AppComponent implements OnInit {
     this.atsakymai.klaus_id=this.klausimai[this.currentQuestion].klaus_id;
     this.atsakymai.ats=atsak;
     this.atsakymai.taskai=this.points;
-    this.klausimaiservice.postAts(this.atsakymai).subscribe(
+    this.atsakymaiservice.postAts(this.atsakymai).subscribe(
       (data: Atsakymai) =>{
         console.log(data);
       },

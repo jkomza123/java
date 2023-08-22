@@ -11,17 +11,17 @@ import com.example.demo.Repositories.KlausimaiRepo;
 
 @Service
 public class KlausimaiService {
+    @Autowired
     private final KlausimaiRepo klausimaiRepo;
 
     public KlausimaiService(KlausimaiRepo klausimaiRepo){
         this.klausimaiRepo = klausimaiRepo;
     }
-
-    @Autowired
+    
     public List<Klausimai> visiKlausimai(){
         return klausimaiRepo.findAll();
     }
-    
+
     public Klausimai klausimaiId(Long klaus_id){
         return klausimaiRepo.findById(klaus_id).orElseThrow(() -> new NotFoundException("Klausimas su id "+ klaus_id + " neegzistuoja"));
     }
